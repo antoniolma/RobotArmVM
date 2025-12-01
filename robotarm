@@ -1,0 +1,84 @@
+#!/bin/bash
+# Robot Arm Compiler - Wrapper Script
+# Compila e executa programas .robot automaticamente
+
+# Cores para output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Verifica se o compilador existe
+if [ ! -f "./robot_arm_compiler" ]; then
+    echo -e "${RED}Erro: Compilador não encontrado!${NC}"
+    echo "Execute 'make' primeiro para construir o compilador."
+    exit 1
+fi
+
+# Verifica se foi passado um arquivo
+if [ $# -eq 0 ]; then
+    echo -e "${YELLOW}Uso: $0 <arquivo.robot>${NC}"
+    echo ""
+    echo "Exemplos disponíveis:"
+    for f in examples/*.robot; do
+        echo "  ./robotarm $f"
+    done
+    exit 1
+fi
+
+ROBOT_FILE="$1"
+
+# Verifica se o arquivo existe
+if [ ! -f "$ROBOT_FILE" ]; then
+    echo -e "${RED}Erro: Arquivo '$ROBOT_FILE' não encontrado!${NC}"
+    exit 1
+fi
+
+# Define nomes dos arquivos temporários
+BASE_NAME="${ROBOT_FILE%.robot}"
+ASM_FILE="${BASE_NAME}.asm"
+OBJ_FILE="${BASE_NAME}.o"
+OUT_FILE="${BASE_NAME}.out"
+
+# Limpa arquivos antigos se existirem
+rm -f "$OBJ_FILE" "$OUT_FILE" 2>/dev/null
+
+echo -e "${YELLOW}[1/4] Compilando para Assembly...${NC}"
+if ! ./robot_arm_compiler "$ROBOT_FILE" "$ASM_FILE"; then
+    echo -e "${RED}✗ Erro na compilação!${NC}"
+    exit 1
+fi
+
+echo -e "${YELLOW}[2/4] Montando código Assembly...${NC}"
+if ! nasm -f elf32 "$ASM_FILE" -o "$OBJ_FILE" 2>/dev/null; then
+    echo -e "${RED}✗ Erro na montagem (nasm)!${NC}"
+    exit 1
+fi
+
+echo -e "${YELLOW}[3/4] Linkando executável...${NC}"
+if ! gcc -m32 -no-pie "$OBJ_FILE" -o "$OUT_FILE" 2>/dev/null; then
+    echo -e "${RED}✗ Erro no linking (gcc)!${NC}"
+    exit 1
+fi
+
+echo -e "${YELLOW}[4/4] Executando programa...${NC}"
+echo ""
+echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+
+# Executa o programa
+"$OUT_FILE"
+EXIT_CODE=$?
+
+echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo ""
+
+# Limpa arquivos temporários
+rm -f "$OBJ_FILE" "$OUT_FILE" 2>/dev/null
+
+if [ $EXIT_CODE -eq 0 ]; then
+    echo -e "${GREEN}✓ Programa executado com sucesso!${NC}"
+    exit 0
+else
+    echo -e "${RED}✗ Programa terminou com erro (código $EXIT_CODE)${NC}"
+    exit $EXIT_CODE
+fi

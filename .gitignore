@@ -1,0 +1,49 @@
+# ============================================
+# .gitignore - Robot Arm VM
+# ============================================
+
+# Arquivos gerados pelo compilador
+robot_arm_compiler
+lex.yy.c
+robot_arm.tab.c
+robot_arm.tab.h
+robot_arm.output
+
+# Arquivos Assembly e objetos gerados (exceto a VM)
+*.o
+*.out
+
+# Arquivos Assembly gerados (exceto robot_vm.asm que é o template)
+examples/*.asm
+*.asm
+!robot_vm.asm
+
+# Arquivos Python (do compilador antigo)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Arquivos de teste gerados
+examples/*.asm
+examples/*.o
+examples/*.out
+
+# Arquivos temporários
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Arquivos do editor
+.vscode/
+.idea/
+*.sublime-*
+
+# Arquivos de log
+*.log
+
+# Arquivos de backup
+*.bak
+*.backup
