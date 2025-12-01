@@ -6,7 +6,7 @@
 
 ---
 
-## 🚀 Exemplo Rápido
+##  Exemplo Rápido
 
 ```robot
 // Seu primeiro programa em Robot Arm!
@@ -17,11 +17,11 @@ esperar 1000
 soltar
 ```
 
-**Apenas 5 linhas** para controlar um braço robótico! 🤖
+**Apenas 5 linhas** para controlar um braço robótico! 
 
 ---
 
-## 📖 Descrição do Projeto
+##  Descrição do Projeto
 
 O projeto consiste em um **compilador completo** para controle de braços mecânicos, desenvolvido com **Flex** (análise léxica) e **Bison** (análise sintática). 
 
@@ -35,23 +35,23 @@ A linguagem possui sintaxe simples em português e compila para **Assembly x86**
 
 ---
 
-## ✨ Características da Linguagem
+##  Características da Linguagem
 
 ### Estruturas de Controle
-- ✅ **Variáveis**: Declaração e atribuição com suporte a expressões aritméticas
-- ✅ **Condicionais**: `se` / `senao` para tomada de decisões
-- ✅ **Loops**: `enquanto` para repetição de comandos
+-  **Variáveis**: Declaração e atribuição com suporte a expressões aritméticas
+-  **Condicionais**: `se` / `senao` para tomada de decisões
+-  **Loops**: `enquanto` para repetição de comandos
 
 ### Comandos Específicos do Robô
-- 🤖 **mover**: Move o braço em 4 direções (cima, baixo, esquerda, direita)
-- ✋ **pegar**: Fecha a garra para segurar objetos
-- 👐 **soltar**: Abre a garra para liberar objetos
-- ⏱️ **esperar**: Delay para sincronização de movimentos
+-  **mover**: Move o braço em 4 direções (cima, baixo, esquerda, direita)
+-  **pegar**: Fecha a garra para segurar objetos
+-  **soltar**: Abre a garra para liberar objetos
+- ⏱ **esperar**: Delay para sincronização de movimentos
 
 ### Sensores Inteligentes
-- 📦 **objeto**: Detecta presença de objetos
-- ⚖️ **peso**: Mede o peso do objeto segurado (0-10)
-- 🚧 **limite**: Detecta limites de movimento (segurança)
+-  **objeto**: Detecta presença de objetos
+-  **peso**: Mede o peso do objeto segurado (0-10)
+-  **limite**: Detecta limites de movimento (segurança)
 
 ### Operadores Suportados
 - **Aritméticos**: `+`, `-`, `*`, `/`
@@ -59,7 +59,7 @@ A linguagem possui sintaxe simples em português e compila para **Assembly x86**
 
 ---
 
-## 🔧 Como Rodar
+##  Como Rodar
 
 ### 1. Instalar Dependências (Ubuntu/Debian)
 
@@ -87,10 +87,10 @@ make test
 ```
 
 Isso vai:
-- ✅ Compilar o código .robot para Assembly
-- ✅ Montar o Assembly para código objeto
-- ✅ Linkar e criar o executável
-- ✅ Executar e mostrar o feedback visual!
+-  Compilar o código .robot para Assembly
+-  Montar o Assembly para código objeto
+-  Linkar e criar o executável
+-  Executar e mostrar o feedback visual!
 
 **Saída esperada:**
 ```
@@ -99,7 +99,7 @@ Isso vai:
 [3/4] Linkando executável...
 [4/4] Executando programa...
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 ========================================
 [ROBO] Iniciando programa...
 ========================================
@@ -112,9 +112,9 @@ Isso vai:
 ========================================
 [ROBO] Programa finalizado com sucesso!
 ========================================
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-✓ Programa executado com sucesso!
+
+ Programa executado com sucesso!
 ```
 
 ### 5. Ver Todos os Exemplos Disponíveis
@@ -141,11 +141,11 @@ gcc -m32 -no-pie examples/07_hello_robot.o -o examples/07_hello_robot.out
 ./examples/07_hello_robot.out
 ```
 
-✨ **Cada comando do robô imprime mensagens mostrando o que está acontecendo!**
+ **Cada comando do robô imprime mensagens mostrando o que está acontecendo!**
 
 ---
 
-## 📝 EBNF da Linguagem
+##  EBNF da Linguagem
 
 ```ebnf
 Program         = { Statement } ;
@@ -187,7 +187,7 @@ Digit           = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
 
 ---
 
-## 📂 Arquivos do Projeto
+##  Arquivos do Projeto
 
 - **`robot_arm.l`** - Analisador Léxico (Flex)
 - **`robot_arm.y`** - Analisador Sintático (Bison)
